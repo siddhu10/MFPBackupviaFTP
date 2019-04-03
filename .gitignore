@@ -1,0 +1,22 @@
+# Comment
+
+*.ssh
+*.ssh.pub
+*.htm
+*.filters
+*.user
+.vs
+x64
+x86
+obj
+ARM
+Debug
+Release
+AppPackages
+BundleArtifacts
+*.backup.*
+*.har
+*.diagsession
+*.vsps
+*.vspx
+*.csv

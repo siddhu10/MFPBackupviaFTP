@@ -1,0 +1,82 @@
+﻿<Page
+    x:Class="FTPviaMFP.AppPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FTPviaMFP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:FTPviaMFP"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" VerticalScrollMode="Enabled">
+        <RelativePanel HorizontalAlignment="Center">
+            <FlyoutPresenter x:Name="progDlg" Visibility="Collapsed" Canvas.ZIndex="2" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="300" Width="456" Margin="90,300,0,0">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock x:Uid="progDlgLabel" Text="Backup in Progress" FontSize="20" />
+                    <TextBlock x:Name="opText" Margin="10,40,0,0" />
+                    <TextBlock x:Name="boxText" Margin="10,5,0,0" />
+                    <TextBlock x:Name="docText" Margin="10,5,0,20" />
+                    <StackPanel Orientation="Horizontal">
+                        <ProgressBar x:Name="progressBar" Minimum="0" Maximum="100" Foreground="{ThemeResource SystemAccentColor}" Width="375" VerticalAlignment="Center" />
+                        <TextBlock x:Name="progressText" VerticalAlignment="Center" Margin="5,0" />
+                    </StackPanel>
+                    <Button x:Uid="hideBtnLabel" x:Name="hideBtn" Content="Hide Progress Dialog" Click="HideBtn_Click" Margin="0,40,0,0" HorizontalAlignment="Center" Background="{ThemeResource SystemAccentColor}" />
+                </StackPanel>
+            </FlyoutPresenter>
+            <TextBlock x:Uid="appTitleLabel" Margin="15" Text="Backup Utility" FontSize="30" />
+            <AppBarButton x:Uid="logoutLabel" x:Name="logoutButton" Click="OnLogoutButtonClick" Label="Logout" RelativePanel.AlignRightWithPanel="True" Margin="0,10,10,0" Foreground="{ThemeResource SystemAccentColor}">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE112;" Margin="0,-2,0,0" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <StackPanel x:Name="appPanel" Orientation="Vertical" VerticalAlignment="Center" Margin="25,80,10,0" MinWidth="600" MinHeight="600">
+                <Border CornerRadius="6" BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="2" Padding="15">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Uid="targtLabel" x:Name="trgtPath" Width="450" Header="Target File" />
+                        <Button x:Uid="brwsLabel" x:Name="brwsBtn" Content="Browse" Margin="15,25,0,0" Width="100" Click="BrwsBtn_Click" Background="{ThemeResource SystemAccentColor}" />
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="{ThemeResource SystemAccentColor}" BorderThickness="2" Margin="0,20">
+                    <ListView x:Name="boxView" ItemsSource="{x:Bind MFPBoxes}"
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled"
+                              SelectionMode="Multiple" Height="500" Width="Auto">
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <Grid Padding="5" Background="{ThemeResource SystemAccentColor}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock x:Uid="boxNameLabel" Text="Name" Margin="75,0" />
+                                    <TextBlock x:Uid="boxBkupDateLabel" Grid.Column="1" Text="Last Backup Time" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="data:EBBox">
+                                <Grid Padding="5" Height="Auto">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="220" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image x:Name="boxIcon" Width="25" Height="25" Source="{x:Bind BoxIcon}" />
+                                    <TextBlock x:Name="boxName" Grid.Column="1" VerticalAlignment="Center" Text="{x:Bind BoxName}" Margin="5,0" />
+                                    <TextBlock x:Name="backupDate" Grid.Column="2" VerticalAlignment="Center" Text="{x:Bind UILastBackupDate}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Border>
+            </StackPanel>
+            <Button x:Uid="backupLabel" x:Name="bkpBtn" Content="Backup" RelativePanel.Below="appPanel" RelativePanel.AlignRightWith="appPanel" Margin="0,20,20,0" Width="100" IsEnabled="False" Click="BkpBtn_Click" Background="{ThemeResource SystemAccentColor}" />
+            <ProgressBar x:Name="progBar" IsIndeterminate="True" Visibility="Collapsed" RelativePanel.Below="bkpBtn" Margin="60,15" Width="500" />
+            <TextBlock x:Name="statusMsg" RelativePanel.Below="progBar" Margin="15,0" Width="600" />
+            <TextBlock x:Name="mfpLabel" RelativePanel.AlignBottomWithPanel="True" Margin="25,0,0,15" Foreground="{ThemeResource SystemAccentColor}" />
+            <TextBlock x:Name="ipLabel" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" Margin="0,0,25,15" Foreground="{ThemeResource SystemAccentColor}" />
+        </RelativePanel>
+    </ScrollViewer>
+</Page>

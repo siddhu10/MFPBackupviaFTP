@@ -1,0 +1,31 @@
+﻿<ContentDialog
+    x:Class="FTPviaMFP.ConnectDialog"
+    x:Uid="loginDlg"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FTPviaMFP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="MFP Login"
+    PrimaryButtonText="OK"
+    SecondaryButtonText="Cancel"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    <Grid x:Name="loginGrid" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Uid="ipLabel" Text="Enter MFP IP" Grid.Row="0" Grid.Column="0" Padding="10" />
+        <TextBlock x:Uid="paswdLabel" Text="Enter Administrator's Password" Grid.Row="1" Grid.Column="0" Padding="10" />
+        <TextBox x:Name="ipBox" Height="20" Width="250" Grid.Row="0" Grid.Column="1" />
+        <PasswordBox x:Name="paswdBox" Height="20" Width="250" Grid.Row="1" Grid.Column="1" />
+    </Grid>
+</ContentDialog>
